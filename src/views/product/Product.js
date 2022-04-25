@@ -49,7 +49,7 @@ const Product = () =>{
             {
                 product !== undefined ? 
                 <div className="container">
-                    <div className="row">
+                    <div className="row d-none d-md-block">
                         <div className="col-12">
                             <div className="blBreadcrumb pt-3">
                                 <nav aria-label="breadcrumb">
@@ -64,35 +64,34 @@ const Product = () =>{
                     </div>
                     <div className="row">
                         <div className="col-md-5 col-lg-6">
-                            <div id="carouselExampleIndicators" className="carousel slide" data-bs-ride="carousel">
-                               
-                                <div className="carousel-inner">
-                                    {product.media.map((item, index)=>(
-                                        <div className={`carousel-item  ${ index === 0 ? 'active' : ''} `} key={item.id}>
-                                            <img src={item.src} className="d-block w-100" alt={item.alt} />
-                                        </div>
-                                    ))}
-                                </div>
-                                <div className="row mt-3">
-                                    {product.media.slice(0,3).map((item, index)=>(
-                                        <div className="col-4 " key={item.id} >
-                                        
-                                            <div  data-bs-target="#carouselExampleIndicators"  data-bs-slide-to={index} className={`${index === 0 ? 'active' : ''}`} aria-current="true" aria-label="Slide 1">
-                                                <img src={item.preview_image.src} width="100%" alt="" />
+                            <div className="blCarrousel">
+                                <div id="carouselExampleIndicators" className="carousel slide" data-bs-ride="carousel">
+                                
+                                    <div className="carousel-inner">
+                                        {product.media.map((item, index)=>(
+                                            <div className={`carousel-item  ${ index === 0 ? 'active' : ''} `} key={item.id}>
+                                                <img src={item.src} className="d-block w-100" alt={item.alt} />
                                             </div>
-                                        </div>
+                                        ))}
+                                    </div>
+                                    <div className="row mt-3">
+                                        {product.media.slice(0,3).map((item, index)=>(
+                                            <div className="col-4 " key={item.id} >
+                                            
+                                                <div  data-bs-target="#carouselExampleIndicators"  data-bs-slide-to={index} className={`${index === 0 ? 'active' : ''} d-none d-md-block`} aria-current="true" aria-label={"Slide "+index}>
+                                                    <img src={item.preview_image.src} width="100%" alt="" />
+                                                </div>
+                                                
+                                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to={index} className={`${index === 0 ? 'active' : ''} d-lg-none`} aria-current="true" aria-label={"Slide "+index}></button>
+                                            </div>
 
-                                    ))}
-                                    {/* <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1">
-
-                                    </button>
-                                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button> */}
+                                        ))}
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div className="col-md-7 col-lg-6">
-                            <div className="blProduct_c">
+                            <div className="blProduct__content ps-md-4 pb-4">
                                 <div className="blProduct__cat">
                                     by Nike x ALYX
                                 </div>
@@ -104,12 +103,19 @@ const Product = () =>{
                                 </div>
                                 <div className="blProduct__color">
                                     
-                                    <div className="form-check form-check-inline">
+                                    <div className="form-check form-check-inline ps-1">
                                        <p>Color: </p>
                                     </div>
                                     {product.options[0].values.map((item, index)=>(
                                         <div className="form-check form-check-inline">
-                                            <input className="form-check-input" type="radio" name="inlineRadioOptions" id={"inlineRadioOptions"+index} value={item} onChange={fnColor} />
+                                            <input 
+                                                className="form-check-input" 
+                                                type="radio" 
+                                                name="inlineRadioOptions" 
+                                                id={"inlineRadioOptions"+index} 
+                                                value={item} onChange={fnColor}
+                                                style={{backgroundColor: item }} 
+                                                />
                                             <label className="form-check-label" htmlhtmlFor={"inlineRadioOptions"+index}>{item}</label>
                                         </div>
                                     ))}
@@ -117,15 +123,22 @@ const Product = () =>{
                                     
                                 </div>
                                 <div className="blProduct__size">
-                                    <div className="form-check form-check-inline">
-                                       <p>Size: </p>
-                                    </div>
-                                    {product.options[1].values.map((item, index)=>(
-                                        <div className="form-check form-check-inline" key={index}>
-                                            <input type="radio" className="btn-check" name="options" id={"option"+index} value={item} autoComplete="off" onChange={fnSize} />
-                                            <label className="btn btn-secondary" htmlFor={"option"+index}>{item}</label>
+                                    <div className="row">
+                                        <div className="col-2 col-sm-1 col-md-2  col-lg-1">
+                                            <div className="form-check form-check-inline">
+                                                <p>Size: </p>
+                                            </div>
                                         </div>
-                                    ))}
+                                        
+                                        <div className="col-10 col-sm-11 col-md-10 col-lg-11">
+                                            {product.options[1].values.map((item, index)=>(
+                                                <div className="form-check form-check-inline" key={index}>
+                                                    <input type="radio" className="btn-check" name="options" id={"option"+index} value={item} autoComplete="off" onChange={fnSize} />
+                                                    <label className="btn btn-secondary" htmlFor={"option"+index}>{item}</label>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
                                 </div>
                                 <div className="blProduct__buy">
                                     <div className="blProduct__buy--count d-flex justify-content-between">
