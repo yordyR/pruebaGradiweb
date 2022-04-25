@@ -9,6 +9,7 @@ const Product = () =>{
     const [product, setProduct] = useState()
     const [size, setSize] = useState(null)
     const [count, setCount] = useState(1)
+    const [color, setColor] = useState(null)
 
 
     useEffect(()=>{
@@ -35,8 +36,12 @@ const Product = () =>{
         setCount(count-1)
     }
 
+    const fnColor = event =>{
+        setColor(event.target.value)
+    }
+
     const fnSize = event =>{
-        console.log(event.target.value)
+        setSize(event.target.value)
     }
 
     return (
@@ -98,20 +103,17 @@ const Product = () =>{
                                     <span className="blProduct__price--min"> {numeral(product.price).format("$ 0,0")} </span> <span className="blProduct__price--max"> { numeral(product.compare_at_price).format("$ 0,0")}</span>
                                 </div>
                                 <div className="blProduct__color">
-                                    {/* <div className="form-check form-check-inline">
-                                        <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
-                                        <label className="form-check-label" htmlhtmlFor="inlineRadio1">1</label>
-                                    </div>
                                     
                                     <div className="form-check form-check-inline">
-                                        <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
-                                        <label className="form-check-label" htmlhtmlFor="inlineRadio1">1</label>
+                                       <p>Color: </p>
                                     </div>
-                                    
-                                    <div className="form-check form-check-inline">
-                                        <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
-                                        <label className="form-check-label" htmlhtmlFor="inlineRadio1">1</label>
-                                    </div> */}
+                                    {product.options[0].values.map((item, index)=>(
+                                        <div className="form-check form-check-inline">
+                                            <input className="form-check-input" type="radio" name="inlineRadioOptions" id={"option"+index} value={item} onChange={fnColor} />
+                                            <label className="form-check-label" htmlhtmlFor={"option"+index}>{item}</label>
+                                        </div>
+                                    ))}
+                                   
                                     
                                 </div>
                                 <div className="blProduct__size">
@@ -124,30 +126,6 @@ const Product = () =>{
                                             <label className="btn btn-secondary" htmlFor={"option"+index}>{item}</label>
                                         </div>
                                     ))}
-                                    
-                                    {/* <div className="form-check form-check-inline">
-                                        <input type="radio" className="btn-check" name="options" id="option1" value={1} autoComplete="off" onChange={fnSize} />
-                                        <label className="btn btn-secondary" htmlFor="option1">Checked</label>
-                                    </div>
-                                    
-                                    <div className="form-check form-check-inline">
-                                        <input type="radio" className="btn-check" name="options" id="option2" value={2} autoComplete="off" onChange={fnSize} />
-                                        <label className="btn btn-secondary" htmlFor="option2">Checked1</label>
-                                    </div>
-                                    
-                                    <div className="form-check form-check-inline">
-                                        <input type="radio" className="btn-check" name="options" id="option3" value={3} autoComplete="off" onChange={fnSize} />
-                                        <label className="btn btn-secondary" htmlFor="option3">Checked</label>
-                                    </div>
-                                    <div className="form-check form-check-inline">
-                                        <input className="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" />
-                                        <label className="form-check-label" htmlhtmlFor="inlineCheckbox2">2</label>
-                                    </div>
-                                    
-                                    <div className="form-check form-check-inline">
-                                        <input className="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" />
-                                        <label className="form-check-label" htmlhtmlFor="inlineCheckbox2">2</label>
-                                    </div> */}
                                 </div>
                                 <div className="blProduct__buy">
                                     <div className="blProduct__buy--count d-flex justify-content-between">
