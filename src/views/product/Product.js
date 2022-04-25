@@ -109,8 +109,8 @@ const Product = () =>{
                                     </div>
                                     {product.options[0].values.map((item, index)=>(
                                         <div className="form-check form-check-inline">
-                                            <input className="form-check-input" type="radio" name="inlineRadioOptions" id={"option"+index} value={item} onChange={fnColor} />
-                                            <label className="form-check-label" htmlhtmlFor={"option"+index}>{item}</label>
+                                            <input className="form-check-input" type="radio" name="inlineRadioOptions" id={"inlineRadioOptions"+index} value={item} onChange={fnColor} />
+                                            <label className="form-check-label" htmlhtmlFor={"inlineRadioOptions"+index}>{item}</label>
                                         </div>
                                     ))}
                                    
